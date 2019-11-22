@@ -14,6 +14,7 @@
 }
 .value {
   grid-area: value;
+
 }
 .rate {
   grid-area: rate;
@@ -25,4 +26,11 @@
   grid-area: end;
 }
 
+.input-group {
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
 

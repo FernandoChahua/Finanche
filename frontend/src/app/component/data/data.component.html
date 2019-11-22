@@ -4,50 +4,184 @@
   </div>
 
   <div class="value">
-    <mat-form-field>
-      <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento" [(ngModel)]="expiringDate">
-      <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
-      <mat-datepicker #expirePicker></mat-datepicker>
-    </mat-form-field>
+    <h3>Datos de la Letra</h3>
 
-    <mat-form-field>
-      <input matInput placeholder="Valor Nominal">
-    </mat-form-field>
+    <!-- FECHA DE VENCIMINETO // LETRA -->
+    <div class="input-group">
+      <mat-label>Fecha de vencimiento</mat-label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento"
+               [(ngModel)]="letter.expirationDate">
+        <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
+        <mat-datepicker #expirePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <input matInput placeholder="Retencion">
-    </mat-form-field>
+    <!-- VALOR NOMINAL // LETRA -->
+    <div class="input-group">
+      <mat-label>Valor Nominal</mat-label>
+      <mat-form-field>
+        <input matInput placeholder="Valor Nominal" [(ngModel)]="letter.nominalValue">
+        <mat-icon matSuffix></mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- RETENCION // LETRA -->
+    <div class="input-group">
+      <mat-label>Retencion</mat-label>
+      <mat-form-field>
+        <input matInput placeholder="Retencion" [(ngModel)]="letter.retention">
+        <mat-icon matSuffix></mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- MONEDA // LETRA -->
+    <div class="input-group">
+      <mat-label>Moneda</mat-label>
+      <mat-form-field>
+        <mat-label>Moneda</mat-label>
+        <mat-select [(ngModel)]="this.letter.typeOfCurrency">
+          <mat-option *ngFor="let item of currency | keyvalue" [value]="item.key">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
   </div>
 
-  <div class="rate">
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
-      </mat-option>
-    </mat-select>
+<!--  <div class="rate">
+    <h3>Tasa y Plazo</h3>
 
-    <mat-label>Favorite food</mat-label>
-    <mat-select>
-      <mat-option>
+    &lt;!&ndash; DIAS POR AÑO // PORT    &ndash;&gt;
+    <div class="input-group">
+      <mat-label>Dias por año</mat-label>
+      <mat-form-field>
+        <mat-label>Dias por año</mat-label>
+        <mat-select [(ngModel)]="this.daysPerYear">
+          <mat-option *ngFor="let days of daysPerYearOptions" [value]="days">
+            {{days}} dias
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-      </mat-option>
-    </mat-select>
+    &lt;!&ndash; PLAZO DE TASA (LIBRE) &ndash;&gt;
+    <div class="input-group">
+      <mat-label>Plazo de tasa</mat-label>
+      <mat-form-field>
+        <mat-label>Plazo de tasa</mat-label>
+        <mat-select [(ngModel)]="termLength">
+          <mat-option *ngFor="let item of terms | keyvalue" [value]="item.key">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <input matInput placeholder="Tasa Efectiva">
-    </mat-form-field>
+    &lt;!&ndash; TASA EFECTIVA // PORT &ndash;&gt;
+    <div class="input-group">
+      <mat-label>Tasa Efectiva</mat-label>
+      <mat-form-field>
+        <input matInput placeholder="Tasa Efectiva" [(ngModel)]="tea">
+        <mat-icon matSuffix></mat-icon>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento" [(ngModel)]="expiringDate">
-      <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
-      <mat-datepicker #discountPicker></mat-datepicker>
-    </mat-form-field>
-  </div>
+    &lt;!&ndash; FECHA DE DESCUENTO // PORT&ndash;&gt;
+    <div class="input-group">
+      <mat-label>Fecha de descuento</mat-label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="discountPicker" placeholder="Fecha de descuento" [(ngModel)]="this.discountDate">
+        <mat-datepicker-toggle matSuffix [for]="discountPicker"></mat-datepicker-toggle>
+        <mat-datepicker #discountPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>-->
+
+
   <div class="start">
+    <h3>Costes/Gastos Iniciales</h3>
 
+    <div class="input-group">
+      <mat-label>Motivo</mat-label>
+      <mat-form-field>
+        <mat-label>Motivo</mat-label>
+        <mat-select [(ngModel)]="startUPCost.reason">
+          <mat-option *ngFor="let mot of reasonsStart" [value]="mot.description">
+            {{mot.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-group">
+      <mat-label>Valor</mat-label>
+      <mat-form-field>
+        <input matInput placeholder="Valor" [(ngModel)]="startUPCost.amountReason">
+      </mat-form-field>
+    </div>
+
+    <div class="input-group">
+      <mat-label>Expresado en</mat-label>
+      <mat-form-field>
+        <mat-label>Expresado en</mat-label>
+        <mat-select [(ngModel)]="startUPCost.typeCost">
+          <mat-option *ngFor="let item of costType | keyvalue" [value]="item.key">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-button (click)="addStartUpCost()">Agregar</button>
+
+    <mat-list>
+      <mat-list-item *ngFor="let cost of letter.startupCosts">
+        {{cost.reason}} = {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
+      </mat-list-item>
+    </mat-list>
   </div>
-  <div class="end">
 
+  <div class="end">
+    <h3>Costes/Gastos Finales</h3>
+
+    <h3>Costes/Gastos Iniciales</h3>
+
+    <div class="input-group">
+      <mat-label>Motivo</mat-label>
+      <mat-form-field>
+        <mat-label>Motivo</mat-label>
+        <mat-select [(ngModel)]="finalCost.reason">
+          <mat-option *ngFor="let mot of reasonsStart" [value]="mot.description">
+            {{mot.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="input-group">
+      <mat-label>Valor</mat-label>
+      <mat-form-field>
+        <input matInput placeholder="Valor" [(ngModel)]="finalCost.amountReason">
+      </mat-form-field>
+    </div>
+
+    <div class="input-group">
+      <mat-label>Expresado en</mat-label>
+      <mat-form-field>
+        <mat-label>Expresado en</mat-label>
+        <mat-select [(ngModel)]="finalCost.typeCost">
+          <mat-option *ngFor="let item of costType | keyvalue" [value]="item.key">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-list>
+        <mat-list-item *ngFor="let cost of letter.startupCosts">
+          {{cost.reason}} = {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <button mat-button (click)="addFinalCost()">Agregar</button>
   </div>
 </div>

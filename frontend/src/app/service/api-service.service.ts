@@ -17,9 +17,9 @@ const ENDPOINT = API_ROUTES;
 export class ApiServiceService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  
+
   constructor(private http: HttpClient, private authService: OauthService) { }
-  
+
   private addAuthorizationHeader() {
     const token = this.authService.token;
     if (token != null) {
@@ -117,10 +117,10 @@ export class ApiServiceService {
       );
   }
   getFinalReasons(){
-    return this.http.get<FinalReason[]>(ENDPOINT.finalReason.GET_FINALREASON);
+    return this.http.get<FinalReason[]>(ENDPOINT.finalReason.GET_FINAL_REASON);
   }
   postFinalReason(finalReason: FinalReason){
-    return this.http.post(ENDPOINT.finalReason.POST_FINALREASON,finalReason)
+    return this.http.post(ENDPOINT.finalReason.POST_FINAL_REASON,finalReason)
       .pipe(
         map((response: any) => response as FinalReason),
         catchError(e => {
@@ -138,11 +138,12 @@ export class ApiServiceService {
         })
       );
   }
-  getStartupReasons(){
-    return this.http.get<StartupReason[]>(ENDPOINT.startUpReason.GET_STARTUPREASON);
+  getStartupReasons(): Observable<StartupReason[]> {
+    return this.http.get<StartupReason[]>(ENDPOINT.startUpReason.GET_STARTUP_REASON);
   }
+
   postStartupReason(startupReason: StartupReason){
-    return this.http.post(ENDPOINT.startUpReason.POST_STARTUPREASON,startupReason)
+    return this.http.post(ENDPOINT.startUpReason.POST_STARTUP_REASON, startupReason)
       .pipe(
         map((response: any) => response as StartupReason),
         catchError(e => {

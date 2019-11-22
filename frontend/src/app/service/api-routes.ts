@@ -8,8 +8,8 @@ export const API_ROUTES: Endpoint = {
     GET_BY_ID: `${BASE_URL}/users/`,
   },
   finalReason: {
-    GET_FINALREASON: `${BASE_URL}/finalReason`,
-    POST_FINALREASON: `${BASE_URL}/finalReason`,
+    GET_FINAL_REASON: `${BASE_URL}/finalReason`,
+    POST_FINAL_REASON: `${BASE_URL}/finalReason`,
     GET_BY_ID: `${BASE_URL}/finalReason/`,
   },
   letter: {
@@ -23,8 +23,8 @@ export const API_ROUTES: Endpoint = {
     POST_PORTFOLIO: `${BASE_URL}/portfolios`,
   },
   startUpReason: {
-    GET_STARTUPREASON: `${BASE_URL}/startupReason`,
-    POST_STARTUPREASON: `${BASE_URL}/startupReason`,
+    GET_STARTUP_REASON: `${BASE_URL}/startupReason`,
+    POST_STARTUP_REASON: `${BASE_URL}/startupReason`,
     GET_BY_ID: `${BASE_URL}/startupReason/`,
   }
 }

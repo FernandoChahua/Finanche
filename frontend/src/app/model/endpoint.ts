@@ -5,8 +5,8 @@ export interface Endpoint {
     GET_BY_ID: string;
   };
   finalReason: {
-    GET_FINALREASON: string;
-    POST_FINALREASON: string;
+    GET_FINAL_REASON: string;
+    POST_FINAL_REASON: string;
     GET_BY_ID: string;
   };
   letter: {
@@ -21,8 +21,8 @@ export interface Endpoint {
 
   };
   startUpReason: {
-    GET_STARTUPREASON: string;
-    POST_STARTUPREASON: string;
+    GET_STARTUP_REASON: string;
+    POST_STARTUP_REASON: string;
     GET_BY_ID: string;
   };
 }

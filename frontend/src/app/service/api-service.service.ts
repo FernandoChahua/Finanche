@@ -161,8 +161,9 @@ export class ApiServiceService {
         })
       );
   }
-  getPortafoliosOfUser(id: number){
-    this.http.get<Portfolio[]>(ENDPOINT.portfolio.GET_PORTFOLIOS_USER+id);
+  getPortafoliosOfUser(){
+    let id = this.authService.idUser;
+    return this.http.get<Portfolio[]>(ENDPOINT.portfolio.GET_PORTFOLIOS_USER+id);
   }
   postPortfolio(portfolio: Portfolio){
     return this.http.post(ENDPOINT.portfolio.POST_PORTFOLIO,portfolio)

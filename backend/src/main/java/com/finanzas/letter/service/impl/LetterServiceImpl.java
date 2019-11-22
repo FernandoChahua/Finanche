@@ -97,7 +97,7 @@ public class LetterServiceImpl implements LetterService{
 			letterRepository.deleteById(id);
 		else
 			deleted = new Letter();
-		return null;
+		return deleted;
 		
 	}
 	

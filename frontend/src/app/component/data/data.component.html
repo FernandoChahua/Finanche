@@ -1,0 +1,53 @@
+<div class="grid-container">
+  <div class="grid-header">
+    <h3>Letra descontada a Tasa Efectiva</h3>
+  </div>
+
+  <div class="value">
+    <mat-form-field>
+      <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento" [(ngModel)]="expiringDate">
+      <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
+      <mat-datepicker #expirePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Valor Nominal">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Retencion">
+    </mat-form-field>
+  </div>
+
+  <div class="rate">
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <mat-option>
+
+      </mat-option>
+    </mat-select>
+
+    <mat-form-field>
+      <input matInput placeholder="Tasa Efectiva">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento" [(ngModel)]="expiringDate">
+      <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
+      <mat-datepicker #discountPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="start">
+
+  </div>
+  <div class="end">
+
+  </div>
+</div>

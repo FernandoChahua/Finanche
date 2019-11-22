@@ -1,0 +1,28 @@
+.grid-container {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "value rate"
+    "start end";
+}
+
+.grid-header {
+  grid-area: header;
+}
+.value {
+  grid-area: value;
+}
+.rate {
+  grid-area: rate;
+}
+.start {
+  grid-area: start;
+}
+.end {
+  grid-area: end;
+}
+
+

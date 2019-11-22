@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { HomeComponent } from './component/home/home.component';
+import { DataComponent } from './component/data/data.component';
 
 export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -18,7 +19,8 @@ export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
   declarations: [
     AppComponent,
     LayoutComponent,
-    HomeComponent
+    HomeComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,

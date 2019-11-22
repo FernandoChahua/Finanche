@@ -1,5 +1,5 @@
 import {Endpoint} from '../model/endpoint';
-const BASE_URL = 'http://localhost:9001/';
+const BASE_URL = 'http://localhost:9001';
 
 export const API_ROUTES: Endpoint = {
   account: {

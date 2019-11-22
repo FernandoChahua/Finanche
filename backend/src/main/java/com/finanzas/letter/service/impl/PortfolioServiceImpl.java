@@ -26,7 +26,6 @@ public class PortfolioServiceImpl implements PortfolioService {
 	@Override
 	public Portfolio insertOrUpdate(Portfolio entity) {
 		// TODO Auto-generated method stub
-
 		return portfolioRepository.save(entity);
 	}
 

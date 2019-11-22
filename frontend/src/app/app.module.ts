@@ -12,6 +12,8 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { HomeComponent } from './component/home/home.component';
 import { DataComponent } from './component/data/data.component';
+import { LoginComponent } from './component/auth/login/login.component';
+import { RegisterComponent } from './component/auth/register/register.component';
 
 export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -20,7 +22,9 @@ export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
     AppComponent,
     LayoutComponent,
     HomeComponent,
-    DataComponent
+    DataComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

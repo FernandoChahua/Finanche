@@ -5,6 +5,7 @@ import {HomeComponent} from './component/home/home.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { LettersComponent } from './component/letters/letters.component';
+import { PortfoliosComponent } from './component/portfolios/portfolios.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
         path:'letters',
         component:LettersComponent,
         data:{title:'Letras'}
+      },{
+        path:'portfolios',
+        component: PortfoliosComponent,
+        data:{title: 'Cartera de Letras'}
       }
     ]
   },

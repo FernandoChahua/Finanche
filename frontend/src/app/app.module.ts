@@ -15,6 +15,7 @@ import { DataComponent } from './component/data/data.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
 import { LettersComponent } from './component/letters/letters.component';
+import { PortfoliosComponent } from './component/portfolios/portfolios.component';
 
 export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -26,7 +27,8 @@ export let maskOptions: Partial<IConfig> | (() => Partial<IConfig>);
     DataComponent,
     LoginComponent,
     RegisterComponent,
-    LettersComponent
+    LettersComponent,
+    PortfoliosComponent
   ],
   imports: [
     BrowserModule,

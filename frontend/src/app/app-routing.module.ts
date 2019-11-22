@@ -4,6 +4,7 @@ import { LayoutComponent } from './component/layout/layout.component';
 import {HomeComponent} from './component/home/home.component';
 import { LoginComponent } from './component/auth/login/login.component';
 import { RegisterComponent } from './component/auth/register/register.component';
+import { LettersComponent } from './component/letters/letters.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         data: { title: 'Home'}
+      },{
+        path:'letters',
+        component:LettersComponent,
+        data:{title:'Letras'}
       }
     ]
   },

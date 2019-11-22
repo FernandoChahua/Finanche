@@ -1,7 +1,108 @@
 <div class="grid-container">
   <div class="grid-header">
-    <h3>Letra descontada a Tasa Efectiva</h3>
+    <h3>Cartera de Letras descontadas a Tasa Efectiva</h3>
   </div>
+
+    <div class="rate" >
+      <h3>
+        Tasa y Plazo
+        <button *ngIf="!fixedPortfolio" mat-raised-button color="warn" (click)="postPortfolio()">Registrar</button>
+      </h3>
+
+      <!--Nombre// PORT -->
+      <div class="input-group">
+        <mat-label>Nombre</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Nombre" [(ngModel)]="portfolio.name" [disabled]="fixedPortfolio">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- DIAS POR AÑO // PORT    -->
+      <div class="input-group">
+        <mat-label>Dias por año</mat-label>
+        <mat-form-field>
+          <mat-label>Dias por año</mat-label>
+          <mat-select [(ngModel)]="this.portfolio.daysPerYear" [disabled]="fixedPortfolio">
+            <mat-option *ngFor="let days of daysPerYearOptions" [value]="days">
+              {{days}} dias
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- PLAZO DE TASA (LIBRE) -->
+      <div class="input-group">
+        <mat-label>Plazo de tasa</mat-label>
+        <mat-form-field>
+          <mat-label>Plazo de tasa</mat-label>
+          <mat-select [(ngModel)]="termLength" [disabled]="fixedPortfolio">
+            <mat-option *ngFor="let item of terms | keyvalue" [value]="item.value">
+              {{item.key}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- TIPO TASA // PORT -->
+      <div class="input-group">
+        <mat-label>Tipo de tasa</mat-label>
+        <mat-form-field>
+          <mat-label>Tipo de tasa</mat-label>
+          <mat-select [(ngModel)]="nominalRate" [disabled]="fixedPortfolio">
+            <mat-option [value]="true">Nominal</mat-option>
+            <mat-option [value]="false">Efectiva</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Capitalizacion (LIBRE) -->
+      <div class="input-group" *ngIf="nominalRate">
+        <mat-label>Capitalizacion</mat-label>
+        <mat-form-field>
+          <mat-label>Capitalizacion</mat-label>
+          <mat-select [(ngModel)]="capitalization" [disabled]="fixedPortfolio">
+            <mat-option *ngFor="let item of terms | keyvalue" [value]="item.value">
+              {{item.key}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- TASA EFECTIVA // PORT -->
+      <div class="input-group">
+        <mat-label>Tasa Efectiva</mat-label>
+        <mat-form-field>
+          <input matInput placeholder="Tasa Efectiva" [(ngModel)]="rate" [disabled]="fixedPortfolio">
+          <mat-icon matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- FECHA DE DESCUENTO // PORT-->
+      <div class="input-group">
+        <mat-label>Fecha de descuento</mat-label>
+        <mat-form-field>
+          <input matInput [matDatepicker]="discountPicker" placeholder="Fecha de descuento" [(ngModel)]="this.discountDate" [disabled]="fixedPortfolio">
+          <mat-datepicker-toggle matSuffix [for]="discountPicker"></mat-datepicker-toggle>
+          <mat-datepicker #discountPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- MONEDA // LETRA -->
+      <div class="input-group">
+        <mat-label>Moneda</mat-label>
+        <mat-form-field>
+          <mat-label>Moneda</mat-label>
+          <mat-select [(ngModel)]="this.portfolio.typeOfCurrency">
+            <mat-option *ngFor="let item of currency | keyvalue" [value]="item.key" [disabled]="fixedPortfolio">
+              {{item.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+
 
   <div class="value">
     <h3>Datos de la Letra</h3>
@@ -11,7 +112,7 @@
       <mat-label>Fecha de vencimiento</mat-label>
       <mat-form-field>
         <input matInput [matDatepicker]="expirePicker" placeholder="Fecha de vencimiento"
-               [(ngModel)]="letter.expirationDate">
+               [(ngModel)]="expirationDate">
         <mat-datepicker-toggle matSuffix [for]="expirePicker"></mat-datepicker-toggle>
         <mat-datepicker #expirePicker></mat-datepicker>
       </mat-form-field>
@@ -50,58 +151,10 @@
 
   </div>
 
-<!--  <div class="rate">
-    <h3>Tasa y Plazo</h3>
-
-    &lt;!&ndash; DIAS POR AÑO // PORT    &ndash;&gt;
-    <div class="input-group">
-      <mat-label>Dias por año</mat-label>
-      <mat-form-field>
-        <mat-label>Dias por año</mat-label>
-        <mat-select [(ngModel)]="this.daysPerYear">
-          <mat-option *ngFor="let days of daysPerYearOptions" [value]="days">
-            {{days}} dias
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    &lt;!&ndash; PLAZO DE TASA (LIBRE) &ndash;&gt;
-    <div class="input-group">
-      <mat-label>Plazo de tasa</mat-label>
-      <mat-form-field>
-        <mat-label>Plazo de tasa</mat-label>
-        <mat-select [(ngModel)]="termLength">
-          <mat-option *ngFor="let item of terms | keyvalue" [value]="item.key">
-            {{item.value}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    &lt;!&ndash; TASA EFECTIVA // PORT &ndash;&gt;
-    <div class="input-group">
-      <mat-label>Tasa Efectiva</mat-label>
-      <mat-form-field>
-        <input matInput placeholder="Tasa Efectiva" [(ngModel)]="tea">
-        <mat-icon matSuffix></mat-icon>
-      </mat-form-field>
-    </div>
-
-    &lt;!&ndash; FECHA DE DESCUENTO // PORT&ndash;&gt;
-    <div class="input-group">
-      <mat-label>Fecha de descuento</mat-label>
-      <mat-form-field>
-        <input matInput [matDatepicker]="discountPicker" placeholder="Fecha de descuento" [(ngModel)]="this.discountDate">
-        <mat-datepicker-toggle matSuffix [for]="discountPicker"></mat-datepicker-toggle>
-        <mat-datepicker #discountPicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </div>-->
-
-
   <div class="start">
-    <h3>Costes/Gastos Iniciales</h3>
+    <h3>Costos y/o Gastos Iniciales</h3>
+
+
 
     <div class="input-group">
       <mat-label>Motivo</mat-label>
@@ -133,19 +186,22 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button mat-button (click)="addStartUpCost()">Agregar</button>
 
-    <mat-list>
-      <mat-list-item *ngFor="let cost of letter.startupCosts">
-        {{cost.reason}} = {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
-      </mat-list-item>
-    </mat-list>
+    <button mat-raised-button color="primary" (click)="addStartUpCost()">Agregar</button>
+
+    <mat-form-field style="width: 100%">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let cost of letter.startupCosts" removable (removed)="removeStartUpCost(cost)">
+          {{cost.reason}}: {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
+
   </div>
 
   <div class="end">
-    <h3>Costes/Gastos Finales</h3>
-
-    <h3>Costes/Gastos Iniciales</h3>
+    <h3>Costos y/o Gastos Finales</h3>
 
     <div class="input-group">
       <mat-label>Motivo</mat-label>
@@ -176,12 +232,18 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-list>
-        <mat-list-item *ngFor="let cost of letter.startupCosts">
-          {{cost.reason}} = {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
-        </mat-list-item>
-      </mat-list>
+
     </div>
-    <button mat-button (click)="addFinalCost()">Agregar</button>
+    <button mat-raised-button color="primary" (click)="addFinalCost()">Agregar</button>
+
+    <mat-form-field style="width: 100%">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let cost of letter.finalCosts" removable (removed)="removeFinalCost(cost)">
+          {{cost.reason}}: {{cost.amountReason}}<span *ngIf="cost.typeCost=='P'">%</span>
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
   </div>
 </div>
+<button mat-fab (click)="postLetter()"></button>

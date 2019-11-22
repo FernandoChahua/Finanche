@@ -3,7 +3,7 @@ import { Letter } from './letter';
 export class Portfolio {
     id: number;
     name: string;
-    discountDate: Date;
+    discountDate: string;
     daysPerYear: number;
     tea: number;
     tceaPortfolio: number;
@@ -13,4 +13,3 @@ export class Portfolio {
     letters: Letter[];
     idUser: number;
   }
-  

@@ -13,10 +13,9 @@ export class Letter {
     discountRate: number;
     totalFinalCost: number;
     totalStartupCost: number;
-    expirationDate: Date;
+    expirationDate: string;
     typeOfCurrency: string;
     idPortfolio: number;
     startupCosts: StartupCost[];
     finalCosts: FinalCost[];
   }
-  

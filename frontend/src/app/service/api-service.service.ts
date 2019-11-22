@@ -5,6 +5,10 @@ import { OauthService } from './oauth.service';
 import { Letter } from '../model/letter';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { User } from '../model/user';
+import { FinalReason } from '../model/final-reason';
+import { StartupReason } from '../model/startup-reason';
+import { Portfolio } from '../model/portfolio';
 const ENDPOINT = API_ROUTES;
 
 @Injectable({
@@ -54,4 +58,130 @@ export class ApiServiceService {
         })
       );
   }
+
+  putLetter(letter: Letter){
+    return this.http.put(ENDPOINT.letter.PUT_LETTER,letter)
+      .pipe(
+        map((response: any) => response as Letter),
+        catchError(e=>{
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+  deleteLetter(id: number){
+    return this.http.delete(ENDPOINT.letter.DELETE_LETTER+id)
+      .pipe(
+        map((response: any) => response as Letter),
+        catchError(e=>{
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+  registerUser(user: User){
+    return this.http.post(ENDPOINT.account.REGISTER_USER,user)
+      .pipe(
+        map((response: any) => response as User),
+        catchError(e => {
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+  getFinalReasons(){
+    return this.http.get<FinalReason[]>(ENDPOINT.finalReason.GET_FINALREASON);
+  }
+  postFinalReason(finalReason: FinalReason){
+    return this.http.post(ENDPOINT.finalReason.POST_FINALREASON,finalReason)
+      .pipe(
+        map((response: any) => response as FinalReason),
+        catchError(e => {
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+  getStartupReasons(){
+    return this.http.get<StartupReason[]>(ENDPOINT.startUpReason.GET_STARTUPREASON);
+  }
+  postStartupReason(startupReason: StartupReason){
+    return this.http.post(ENDPOINT.startUpReason.POST_STARTUPREASON,startupReason)
+      .pipe(
+        map((response: any) => response as StartupReason),
+        catchError(e => {
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+  getPortafoliosOfUser(id: number){
+    this.http.get<Portfolio[]>(ENDPOINT.portfolio.GET_PORTFOLIOS_USER+id);
+  }
+  postPortfolio(portfolio: Portfolio){
+    return this.http.post(ENDPOINT.portfolio.POST_PORTFOLIO,portfolio)
+      .pipe(
+        map((response: any) => response as Portfolio),
+        catchError(e => {
+          if (this.unAthorized(e)) {
+            return throwError(e);
+          }
+
+          if (e.status == 400) {
+            return throwError(e);
+          }
+
+          console.error(e.error.mensaje);
+          // swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(e);
+        })
+      );
+  }
+
+
 }

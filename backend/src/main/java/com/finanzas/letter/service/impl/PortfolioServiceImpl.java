@@ -158,4 +158,10 @@ public class PortfolioServiceImpl implements PortfolioService {
 		TIR = OperationDate.setPrecision(ratio, 7);
 		return TIR;
 	}
+
+	@Override
+	public List<Portfolio> findByUserId(Long id) {
+		// TODO Auto-generated method stub
+		return portfolioRepository.findByUserId(id);
+	}
 }

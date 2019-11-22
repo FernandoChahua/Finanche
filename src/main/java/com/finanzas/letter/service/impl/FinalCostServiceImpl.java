@@ -25,9 +25,9 @@ public class FinalCostServiceImpl implements FinalCostService{
 	}
 
 	@Override
-	public Optional<FinalCost> getOne(Long id) {
+	public FinalCost getOne(Long id) {
 		// TODO Auto-generated method stub
-		return finalCostRepository.findById(id);
+		return finalCostRepository.findById(id).orElse(null);
 	}
 
 	@Override

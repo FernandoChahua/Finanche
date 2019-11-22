@@ -26,7 +26,7 @@ public class PortfolioController {
 	
 	@GetMapping(path="/{id}")
 	public Portfolio getByIdPortfolio(@PathVariable Long id) {
-		return portfolioService.getOne(id).get();
+		return portfolioService.getOne(id);
 	}
 	@PostMapping
 	public Portfolio savePortfolio(@RequestBody Portfolio requestBody) {

@@ -42,10 +42,10 @@ public class FinalCost {
 	
     @JsonIgnore
 	@ManyToOne(targetEntity = Letter.class,fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "letter_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "letter_id", nullable = false, insertable = true, updatable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Letter letter;
 	
-	@Column(name = "letter_id")
+	@Column(name = "letter_id",insertable = false, updatable = false)
 	private Long idLetter;
 }

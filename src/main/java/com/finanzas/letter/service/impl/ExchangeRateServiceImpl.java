@@ -24,9 +24,9 @@ public class ExchangeRateServiceImpl implements ExchangeRateService{
 	}
 
 	@Override
-	public Optional<ExchangeRate> getOne(Long id) {
+	public ExchangeRate getOne(Long id) {
 		// TODO Auto-generated method stub
-		return exchangeRateRepository.findById(id);
+		return exchangeRateRepository.findById(id).orElse(null);
 	}
 
 	@Override

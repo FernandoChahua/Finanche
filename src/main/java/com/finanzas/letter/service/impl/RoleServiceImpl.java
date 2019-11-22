@@ -25,9 +25,9 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public Optional<Role> getOne(Long id) {
+	public Role getOne(Long id) {
 		// TODO Auto-generated method stub
-		return roleRepository.findById(id);
+		return roleRepository.findById(id).orElse(null);
 	}
 
 	@Override

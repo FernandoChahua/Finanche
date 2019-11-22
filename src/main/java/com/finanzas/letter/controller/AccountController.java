@@ -31,7 +31,7 @@ public class AccountController {
 	}
 	@GetMapping(path="/{id}")
 	public Account getById(@PathVariable Long id) {
-		return accountService.getOne(id).orElse(null);
+		return accountService.getOne(id);
 	}
 	@PostMapping
 	public Account register(@RequestBody Account requestBody) {

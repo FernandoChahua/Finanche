@@ -25,9 +25,9 @@ public class StartupCostServiceImpl implements StartupCostService{
 	}
 
 	@Override
-	public Optional<StartupCost> getOne(Long id) {
+	public StartupCost getOne(Long id) {
 		// TODO Auto-generated method stub
-		return startupCostRepository.findById(id);
+		return startupCostRepository.findById(id).orElse(null);
 	}
 
 	@Override

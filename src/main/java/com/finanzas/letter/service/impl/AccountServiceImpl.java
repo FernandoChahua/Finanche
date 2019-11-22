@@ -28,8 +28,8 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public Optional<Account> getOne(Long id) {
-		return accountRepository.findById(id);
+	public Account getOne(Long id) {
+		return accountRepository.findById(id).orElse(null);
 	}
 
 	@Override

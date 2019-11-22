@@ -76,9 +76,9 @@ public class LetterServiceImpl implements LetterService{
 	}
 
 	@Override
-	public Optional<Letter> getOne(Long id) {
+	public Letter getOne(Long id) {
 		// TODO Auto-generated method stub
-		return letterRepository.findById(id);
+		return letterRepository.findById(id).orElse(null);
 	}
 
 	@Override

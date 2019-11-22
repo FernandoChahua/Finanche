@@ -10,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -40,12 +37,11 @@ public class StartupCost {
 	private String typeCost;
 	
 	@ManyToOne(targetEntity = Letter.class,fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "letter_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "letter_id", nullable = false, insertable = true, updatable = true)
     @JsonIgnore
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Letter letter;
 	
-	@Column(name = "letter_id")
+	@Column(name = "letter_id",insertable = false, updatable = false)
 	private Long idLetter;
 	
 	

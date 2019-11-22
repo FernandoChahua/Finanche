@@ -40,12 +40,25 @@ public class PortfolioServiceImpl implements PortfolioService {
 
 			double tcea = 0;
 			double totalReceived = 0;
-
+			
 			if (letters != null) {
+				
 				for (Letter l : letters) {
+					double factor = 1;
+					String currencyType = l.getTypeOfCurrency() + entity.getTypeOfCurrency();
+					switch(currencyType) {
+					case "SD":
+						factor = Double.valueOf(1)/Double.valueOf(entity.getExchangeRate());
+						break;
+					case "DS":
+						factor = Double.valueOf(entity.getExchangeRate());
+						break;
+					}
 					l = letterRepository.save(l);
-					totalReceived = OperationDate.setPrecision(totalReceived + l.getReceivedValue(), 2);
+					totalReceived = OperationDate.setPrecision(totalReceived + l.getReceivedValue()*factor, 2);
 				}
+				
+				
 			}
 			entity.setLetters(letters);
 			entity.setTotalReceive(totalReceived);
@@ -100,12 +113,20 @@ public class PortfolioServiceImpl implements PortfolioService {
 		while (i < maxIteraciones || (van > 0 && van < precisionSolicitada)) {
 			van = -p.getTotalReceive();
 			for (int j = 0; j < letters.size(); j++) {
-				denominador = OperationDate.setPrecision(Math.pow(1 + ratio,
+				double factor = 1;
+				String currencyType = letters.get(j).getTypeOfCurrency() + p.getTypeOfCurrency();
+				switch(currencyType) {
+				case "SD":
+					factor = Double.valueOf(1)/Double.valueOf(p.getExchangeRate());
+					break;
+				case "DS":
+					factor = Double.valueOf(p.getExchangeRate());
+					break;
+				}
+				denominador = Math.pow(1 + ratio,
 						Double.valueOf(OperationDate.restaDate(p.getDiscountDate(), letters.get(j).getExpirationDate()))
-								/ Double.valueOf(p.getDaysPerYear())),
-						2);
-				van = OperationDate.setPrecision(
-						van + OperationDate.setPrecision(letters.get(j).getDeliveredValue() / denominador, 2), 2);
+								/ Double.valueOf(p.getDaysPerYear()));
+				van = van + (letters.get(j).getDeliveredValue()*factor) / denominador;
 
 			}
 			if (previo == 0) {
@@ -130,7 +151,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 				}
 			}
 			prevRatio = ratio;
-			ratio = OperationDate.setPrecision(Double.valueOf(ratioMIN + ratioMAX) / 2.00, 7);
+			ratio = Double.valueOf(ratioMIN + ratioMAX) / 2.00;
 			nuevoRatio = ratio;
 			i = i + 1;
 		}

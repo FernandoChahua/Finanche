@@ -50,9 +50,8 @@ public class Portfolio {
 	@Column(name="type_of_currency")
 	private String typeOfCurrency;//
 	
-	@OneToOne(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
-	@JoinColumn(name="exchange_rate_id")
-	private ExchangeRate exchangeRate;
+	@Column(name = "exchange_rate")
+	private Double exchangeRate;
 	
 	@OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
 	@JoinColumn(name = "portfolio_id", insertable = false, updatable = false)

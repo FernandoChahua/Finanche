@@ -9,31 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.finanzas.letter.model.Letter;
-import com.finanzas.letter.service.LetterService;
+import com.finanzas.letter.model.Role;
+import com.finanzas.letter.repository.RoleRepository;
 
 @RestController
-@RequestMapping("/letter")
-public class LetterController {
-
-	
+@RequestMapping(path = "/roles")
+public class RoleController {
 	@Autowired
-	private LetterService letterService;
-
+	private RoleRepository roleRepository;
 	
 	@GetMapping
-	public List<Letter> getAll() {
-		List<Letter> letters = this.letterService.getAll();
-
-		return letters;
+	public List<Role> getRoles(){
+		return roleRepository.findAll();
 	}
-
 	@PostMapping
-	public Letter save(@RequestBody Letter requestBody) {
-
-		// save feedbackEntity instance to db
-		Letter letter = this.letterService.insertOrUpdate(requestBody);
-
-		return letter;
+	public Role postRole(@RequestBody Role requestBody) {
+		return roleRepository.save(requestBody);
 	}
 }

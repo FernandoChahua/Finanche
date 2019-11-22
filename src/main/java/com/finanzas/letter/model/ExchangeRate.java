@@ -20,6 +20,7 @@ public class ExchangeRate {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="exchange_rate_id")
 	private Long id;
+	
 	@Column(name="code")
 	private String code;
 	

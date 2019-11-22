@@ -1,5 +1,6 @@
 package com.finanzas.letter.util;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -9,5 +10,7 @@ public class OperationDate {
 		long daysBetween = ChronoUnit.DAYS.between(d1,d2);
 		return daysBetween;
 	}
-	
+	public static double setPrecision(Double value,int scala) {
+		return BigDecimal.valueOf(value).setScale(scala,BigDecimal.ROUND_HALF_DOWN).doubleValue();
+	}
 }

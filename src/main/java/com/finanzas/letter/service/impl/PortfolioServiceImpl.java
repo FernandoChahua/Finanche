@@ -1,6 +1,4 @@
 package com.finanzas.letter.service.impl;
-
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +25,10 @@ public class PortfolioServiceImpl implements PortfolioService{
 	@Override
 	public Portfolio insertOrUpdate(Portfolio entity) {
 		// TODO Auto-generated method stub
+		
+		
+		
+		
 		return portfolioRepository.save(entity);
 	}
 
@@ -71,7 +73,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 		double maxIteraciones=1000;
 		int i=0;
 		while(i<maxIteraciones || (van>0 && van<precisionSolicitada)) {
-			van=0;
+			van = -p.getTotalReceive();
 			for(int j=0; j<letters.size();j++) {
 				denominador=Math.pow(1+ratio,OperationDate.restaDate( p.getDiscountDate(),letters.get(j).getExpirationDate())/p.getDaysPerYear());
 				van= van + letters.get(j).getDeliveredValue()/denominador;

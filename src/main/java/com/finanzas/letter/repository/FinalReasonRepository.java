@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.finanzas.letter.model.FinalReason;
 
 @Repository
-public interface FinalReasonRepository extends JpaRepository<FinalReason, Long> {
+public interface FinalReasonRepository extends JpaRepository<FinalReason, Long>{
 
 }

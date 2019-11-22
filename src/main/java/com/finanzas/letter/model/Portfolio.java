@@ -1,8 +1,9 @@
 package com.finanzas.letter.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,11 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Data;
 
 @Data
@@ -28,16 +30,16 @@ public class Portfolio {
 	private Long id;
 	
 	@Column(name="name")
-	private String name;
+	private String name;//
 	
 	@Column(name="discount_date")
-	public	LocalDate discountDate;
+	public	LocalDate discountDate;//
 	
 	@Column(name="days_per_year")
-	private Integer daysPerYear;
+	private Integer daysPerYear;//
 	
 	@Column(name="tea")
-	private Double tea;
+	private Double tea;//
 	
 	@Column(name="tcea_portfolio")
 	private Double tceaPortfolio;
@@ -46,11 +48,22 @@ public class Portfolio {
 	private Double totalReceive;
 	
 	@Column(name="type_of_currency")
-	private String typeOfCurrency;
+	private String typeOfCurrency;//
 	
-	@ManyToOne(targetEntity = Account.class,fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	//@JsonIgnore
-    private Account idUser;	
+	@OneToOne(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
+	@JoinColumn(name="exchange_rate_id")
+	private ExchangeRate exchangeRate;
+	
+	@OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
+	@JoinColumn(name = "portfolio_id", insertable = false, updatable = false)
+	private List<Letter> letters;
+
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne(targetEntity = Account.class,fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private Account user;	
+	
+	@Column(name="user_id")
+	private Long idUser;
+	
 }

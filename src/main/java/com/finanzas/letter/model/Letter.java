@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.Data;
-
+import java.util.List;
 
 
 @Data
@@ -28,16 +29,16 @@ public class Letter {
 	@Column(name="letter_id",unique=true)
 	private Long id;
 	
-	@Column(name="nominal_value")
+	@Column(name="nominal_value") // recibo
 	private Double nominalValue;
 	
-	@Column(name = "retention")
+	@Column(name = "retention") // recibo
 	private Double retention;
 	
-	@Column(name = "net_worth")
+	@Column(name = "net_worth") 
 	private Double netWorth;
 	
-	@Column(name = "delivered_value")
+	@Column(name = "delivered_value") 
 	private Double deliveredValue;
 	
 	@Column(name="received_value")
@@ -52,16 +53,32 @@ public class Letter {
 	@Column(name="discount_rate")
 	private Double discountRate;
 	
+	@Column(name = "total_final_cost")
+	private Double totalFinalCost;
+	
+	@Column(name = "total_startup_cost")
+	private Double totalStartupCost;
+	
 	@Column(name="expiration_date")
-	private LocalDate expirationDate;
+	private LocalDate expirationDate; // recibo
 	
 	@Column(name="type_of_currency")
-	private String typeOfCurrency;
+	private String typeOfCurrency; // recibo
 	
-	@ManyToOne(targetEntity = Portfolio.class,fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "portfolio_id", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	//@JsonIgnore
-    private Portfolio idPortfolio;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToOne(targetEntity = Portfolio.class,fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "portfolio_id", nullable = false, insertable = false, updatable = false)
+    private Portfolio portfolio;	
+	
+	@Column(name="portfolio_id")
+	private Long idPortfolio;
+	
+	@OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
+	@JoinColumn(name = "letter_id", insertable = false, updatable = false)
+	private List<StartupCost> startupCosts; // recibo
+	
+	@OneToMany(cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE, CascadeType.MERGE }, orphanRemoval = true)
+	@JoinColumn(name = "letter_id", insertable = false, updatable = false)
+	private List<FinalCost> finalCosts; // recibo
 	
 }

@@ -1,6 +1,6 @@
 package com.finanzas.letter.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,7 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.UniqueConstraint;
 
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "users")
 public class Account {
@@ -26,26 +28,26 @@ public class Account {
 	private Long id;
 	
 	@Column(name = "account_status")
-	private int account_status;
+	private int accountStatus;
 
 	@Column(name = "email", unique = true, length = 100)
 	private String email;
 	
 	@Column
-	private Boolean email_validated;
+	private Boolean emailValidated;
 	
 	@Column(name = "first_name", length = 20)
-	private String first_name;
+	private String firstName;
 
 	@Column(name = "last_name", length = 20)
-	private String last_name;
+	private String lastName;
 
 
-	@Column(length = 30)
+	@Column(name = "password")
 	private String password;
 
 	@Column(name = "register_date")
-	private Date register_date;
+	private LocalDate registerDate;
 	
 	@Column(name = "username", unique = true, length = 20)
 	private String username;

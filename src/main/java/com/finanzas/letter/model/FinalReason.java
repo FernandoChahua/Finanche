@@ -7,21 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name = "final_reasons")
+@Table(name= "final_reason")
 public class FinalReason {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="final_reason_id")
 	private Long id;
 	
-	@Column(name = "description")
+	@Column(name = "description",unique = true)
 	private String description;
-
 }

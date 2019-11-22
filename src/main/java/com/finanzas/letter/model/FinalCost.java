@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,25 +30,22 @@ public class FinalCost {
 	@Column(name="final_cost_id")
 	private Long id;
 	
-	@Column(name = "name")
-	private String name;
-	
 	@Column(name = "amount_reason")
 	private Double amountReason;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "final_reason_id", nullable = false)
+    @Column(name = "reason")
     //@JsonIgnore
-    private FinalReason finalReason;
+    private String reason;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cost_type_id", nullable = false)
-    //@JsonIgnore
-    private CostType costType;
+    @Column(name = "type_cost")
+	private String typeCost;
 	
-	@ManyToOne(targetEntity = Letter.class,fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "letter_id", nullable = false)
+    @JsonIgnore
+	@ManyToOne(targetEntity = Letter.class,fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "letter_id", nullable = false, insertable = false, updatable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    //@JsonIgnore
-    private Long idLetter;
+    private Letter letter;
+	
+	@Column(name = "letter_id")
+	private Long idLetter;
 }

@@ -1,0 +1,65 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="nominalValue">
+      <th mat-header-cell *matHeaderCellDef> Valor Nominal </th>
+      <td mat-cell *matCellDef="let element"> {{element.nominalValue}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="retention">
+      <th mat-header-cell *matHeaderCellDef> Retencion </th>
+      <td mat-cell *matCellDef="let element"> {{element.retention}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="netWorth">
+      <th mat-header-cell *matHeaderCellDef> Valor Neto </th>
+      <td mat-cell *matCellDef="let element"> {{element.netWorth}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="deliveredValue">
+      <th mat-header-cell *matHeaderCellDef> Valor Entregado </th>
+      <td mat-cell *matCellDef="let element"> {{element.deliveredValue}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="receivedValue">
+      <th mat-header-cell *matHeaderCellDef> Valor Recibido </th>
+      <td mat-cell *matCellDef="let element"> {{element.receivedValue}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="discountValue">
+      <th mat-header-cell *matHeaderCellDef> Valor del Descuento </th>
+      <td mat-cell *matCellDef="let element"> {{element.discountValue}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tcea">
+      <th mat-header-cell *matHeaderCellDef> TCEA </th>
+      <td mat-cell *matCellDef="let element"> {{element.tcea}} </td>
+    </ng-container>
+    <ng-container matColumnDef="discountRate">
+      <th mat-header-cell *matHeaderCellDef> Porcentaje de descuento </th>
+      <td mat-cell *matCellDef="let element"> {{element.discountRate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="totalFinalCost">
+      <th mat-header-cell *matHeaderCellDef> Costos Finales Totales </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalFinalCost}} </td>
+    </ng-container>
+    <ng-container matColumnDef="totalStartupCost">
+      <th mat-header-cell *matHeaderCellDef> Costos Iniciales Totales </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalStartupCost}} </td>
+    </ng-container>
+    <ng-container matColumnDef="expirationDate">
+      <th mat-header-cell *matHeaderCellDef> Fecha de Vencimiento </th>
+      <td mat-cell *matCellDef="let element"> {{element.expirationDate}} </td>
+    </ng-container>
+    <ng-container matColumnDef="typeOfCurrency">
+      <th mat-header-cell *matHeaderCellDef> Tipo de Moneda </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeOfCurrency}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
